@@ -1,0 +1,22 @@
+[project]
+name = "cmbot"
+version = "0.1.0"
+description = "This is content management bot for my channel."
+authors = [
+    {name = "Developer LL",email = "new.jasjan.programmer@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13,<=3.14"
+dependencies = [
+    "aiogram (>=3.24.0,<4.0.0)",
+    "apscheduler (>=3.11.2,<4.0.0)",
+    "pydantic-settings (>=2.12.0,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+package-mode=false
