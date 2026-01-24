@@ -1,4 +1,4 @@
-FROM python:3.12.6-slim-bookworm
+FROM python:3.13.7-slim-bookworm
 
 # Python
 ENV PYTHONFAULTHANDLER=1 \
@@ -12,9 +12,7 @@ ENV POETRY_NO_INTERACTION=1 \
     POETRY_VIRTUALENVS_CREATE=false \
     POETRY_CACHE_DIR='/var/cache/pypoetry' \
     POETRY_HOME='/usr/local' \
-    POETRY_VERSION=1.8.3
-
-ENV CMBOT_TOKEN=${CMBOT_TOKEN}
+    POETRY_VERSION=2.2.1
 
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 
@@ -24,7 +22,11 @@ WORKDIR /app
 
 COPY pyproject.toml poetry.lock /app/
 
-RUN poetry install --no-ansi $(test "$ENVIRONMENT" == production && echo "--only=main")
+RUN if [ "$ENVIRONMENT" = "production" ]; then \
+    poetry install --no-ansi --only=main ; \
+    else \
+    poetry install --no-ansi ; \
+    fi
 
 COPY . /app
 
