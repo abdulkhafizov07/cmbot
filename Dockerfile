@@ -30,4 +30,6 @@ RUN if [ "$ENVIRONMENT" = "production" ]; then \
 
 COPY . /app
 
+EXPOSE 8080
+
 CMD ["poetry", "run", "python", "main.py"]
