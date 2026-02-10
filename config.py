@@ -1,4 +1,5 @@
 from pydantic import Field
+from pydantic.networks import RedisDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -11,6 +12,10 @@ class Settings(BaseSettings):
     webhook_path: str = Field("/webhook")
     webhook_secret: str = Field()
     base_webhook_url: str = Field()
+
+    mongo_url: str = Field()
+    redis_url: RedisDsn = Field()
+    redis_database: int = Field(0)
 
     model_config = SettingsConfigDict(
         env_file=".env", env_prefix="cmbot_", extra="ignore"
